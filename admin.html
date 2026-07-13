@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#080c1e" />
+  <title>Zalar Farms Challenge — Animateur</title>
+  <link rel="stylesheet" href="style.css?v=2" />
+</head>
+<body data-role="admin">
+
+  <div class="app app--wide">
+
+    <header class="admin-head">
+      <div class="brand">
+        <img src="assets/logo.png" alt="Zalar Farms" onerror="this.style.display='none';this.nextElementSibling.style.display='inline'" />
+        <span class="wm">ZALAR&nbsp;<b>FARMS</b></span>
+      </div>
+      <span class="tagline">Challenge · Écran animateur</span>
+    </header>
+
+    <!-- Lobby -->
+    <section id="screen-admin-lobby" class="screen is-active">
+      <div class="admin-grid">
+        <div class="card stage" style="justify-content:center;align-items:flex-start;padding:30px;gap:20px">
+          <span class="eyebrow">Rejoins la partie</span>
+          <div class="big-title">Zalar Farms<br />Challenge</div>
+          <div style="display:flex;align-items:center;gap:18px;flex-wrap:wrap">
+            <div class="qr-card"><canvas id="qr-canvas"></canvas></div>
+            <div style="display:flex;flex-direction:column;gap:8px">
+              <span class="eyebrow">Scanne pour jouer</span>
+              <div class="url" id="join-url">…</div>
+            </div>
+          </div>
+          <button class="btn hero" id="start-btn" style="max-width:280px">Démarrer la partie</button>
+        </div>
+        <div class="card stage" style="padding:26px">
+          <div class="spread">
+            <span class="eyebrow">Joueurs connectés</span>
+            <span class="big-num" style="font-size:34px" id="admin-player-count">0</span>
+          </div>
+          <div class="players" id="admin-players"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Vidéo -->
+    <section id="screen-admin-video" class="screen">
+      <div class="center">
+        <div class="spinner"></div>
+        <p class="muted">Lecture de l'animation…</p>
+      </div>
+    </section>
+
+    <!-- Question -->
+    <section id="screen-admin-question" class="screen">
+      <div class="grow" style="display:flex;flex-direction:column;justify-content:center;gap:24px">
+        <div class="abar">
+          <span class="chip"><span class="ic gb-violet"></span><span id="admin-q-counter">Question 1</span></span>
+          <div class="atimer" id="admin-timer">30</div>
+          <span class="chip"><span class="ic gb-teal"></span><span id="answered-count">0 / 0 ont répondu</span></span>
+        </div>
+        <div class="prog"><i id="admin-prog" style="width:100%"></i></div>
+        <h1 class="bigq" id="admin-q-text">…</h1>
+        <div class="agrid" id="admin-q-answers"></div>
+      </div>
+    </section>
+
+    <!-- Révélation -->
+    <section id="screen-admin-reveal" class="screen">
+      <div class="admin-grid">
+        <div class="card stage" style="padding:26px">
+          <h2 id="reveal-q-text" style="font-size:24px;font-weight:700;line-height:1.25">…</h2>
+          <div class="dist" id="reveal-dist"></div>
+          <div class="chip" id="reveal-correct" style="align-self:flex-start;margin-top:auto"></div>
+        </div>
+        <div class="card stage" style="padding:26px">
+          <span class="eyebrow">Classement — Top 10</span>
+          <div class="lb" id="reveal-lb"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Podium -->
+    <section id="screen-admin-podium" class="screen">
+      <div class="admin-grid">
+        <div class="card podwrap" style="padding:26px">
+          <span class="eyebrow">Podium final</span>
+          <div class="podium" id="admin-podium"></div>
+        </div>
+        <div class="card stage" style="padding:26px">
+          <span class="eyebrow">Classement final — Top 10</span>
+          <div class="lb" id="admin-final-lb"></div>
+        </div>
+      </div>
+    </section>
+
+    <div id="admin-controls" class="controls"></div>
+
+  </div>
+
+  <!-- Couche vidéo -->
+  <div id="video-layer" class="video-layer">
+    <video id="video-el" playsinline muted preload="auto"></video>
+    <div id="video-fallback" class="video-fallback">
+      <img src="assets/logo.png" alt="Zalar Farms" onerror="this.style.display='none';this.nextElementSibling.style.display='block'" />
+      <div class="wm" style="display:none">ZALAR FARMS</div>
+    </div>
+  </div>
+
+  <script src="assets/vendor/supabase.js"></script>
+  <script src="assets/vendor/qrcode-generator.js"></script>
+  <script src="supabase-config.js"></script>
+  <script src="questions.js?v=3"></script>
+  <script src="game.js?v=3"></script>
+</body>
+</html>

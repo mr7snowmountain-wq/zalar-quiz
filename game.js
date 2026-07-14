@@ -96,6 +96,14 @@
     joinBtn.addEventListener("click", doJoin);
     refreshMono();
 
+    const leaveBtn = $("#leave-btn");
+    if (leaveBtn) leaveBtn.addEventListener("click", () => {
+      localStorage.removeItem("zfc_pid");
+      localStorage.removeItem("zfc_name");
+      localStorage.removeItem("zfc_ini");
+      location.reload();
+    });
+
     async function doJoin() {
       const name = nameInput.value.trim().slice(0, 20);
       if (!name) { nameInput.focus(); nameInput.classList.add("shake"); setTimeout(() => nameInput.classList.remove("shake"), 400); return; }

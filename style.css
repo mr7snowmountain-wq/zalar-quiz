@@ -223,4 +223,11 @@ body{
 
 .warn-banner{position:fixed;top:0;left:0;right:0;z-index:800;background:linear-gradient(90deg,#F45C9A,#B25CFF);color:#160a24;font-weight:700;font-size:13px;text-align:center;padding:10px 16px;}
 
+/* Anti-débordement : les enfants de grille peuvent rétrécir + textes longs coupés */
+.admin-grid>*{min-width:0;}
+.stage,.acard,.lname,.lrow,.drow,.pchip,.lb,.dist,.players{min-width:0;}
+.bigq,.qtext,#reveal-q-text,#admin-q-text,.big-title,.title-xl,.acard,.q-text{overflow-wrap:anywhere;word-break:break-word;}
+.acard{overflow:hidden;}
+.admin-head .tagline{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;}}

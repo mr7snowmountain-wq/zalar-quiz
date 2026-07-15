@@ -56,6 +56,7 @@ const QUESTIONS = [
     question: "À combien de salons Zalar Farms a-t-il participé la saison précédente ?",
     answers: ["5", "6", "7", "8"],
     correct: 2, // 7
+    waitVideo: "https://pub-2bdca0e0bf5a48ef98bdf868a8e77139.r2.dev/VIDEO%20Q6%20(2).mp4",
   },
   {
     // Excel Q7 — réponse "3" (3ᵉ place).

@@ -15,6 +15,12 @@
 
 const QUESTIONS = [
   {
+    // Question d'ambiance (ajoutée) — déplaçable si besoin.
+    question: "Combien de Soukaina y a-t-il dans la salle ?",
+    answers: ["2", "3", "4", "5"],
+    correct: 2, // 4
+  },
+  {
     // Excel Q1 — 8 produits étaient listés (Agrumes, Amandes, Myrtille, Avocat,
     // Datte, Pomme, Caroube, Asperges) → réponse déduite = 8.
     question: "Combien de produits Zalar Farms produit-il ?",

@@ -34,6 +34,7 @@ const QUESTIONS = [
     question: "Quel est le pourcentage de femmes dans l'effectif du Groupe ?",
     answers: ["73 %", "83 %", "93 %"],
     correct: 1, // 83 % (confirmé)
+    waitVideo: "https://pub-2bdca0e0bf5a48ef98bdf868a8e77139.r2.dev/VIDEO%20Q4.mp4",
   },
   {
     // Excel Q4 — 7 produits commercialisés listés → réponse déduite = 7.
@@ -41,7 +42,6 @@ const QUESTIONS = [
     answers: ["5", "6", "7", "8"],
     correct: 2, // 7 (confirmé)
     note: "Les 7 produits commercialisés : Agrumes, Amandes, Myrtille, Avocat, Datte, Pomme, Asperges.",
-    waitVideo: "https://pub-2bdca0e0bf5a48ef98bdf868a8e77139.r2.dev/VIDEO%20Q4.mp4",
   },
   {
     // Excel Q5 — réponse "4" (marchés : Brésil, Maldives, Nigéria, Indonésie).

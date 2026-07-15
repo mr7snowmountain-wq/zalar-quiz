@@ -28,6 +28,7 @@ const QUESTIONS = [
     question: "Quelle est la moyenne mensuelle des effectifs du Groupe ?",
     answers: ["Environ 3 000", "Environ 5 000", "Environ 7 000", "Environ 10 000"],
     correct: 0, // ⚠️ À CONFIRMER — valeur manquante dans le fichier source
+    waitVideo: "https://pub-2bdca0e0bf5a48ef98bdf868a8e77139.r2.dev/VIDEO%20Q2.mp4",
   },
   {
     // Excel Q3 — valeur ABSENTE du fichier source.
@@ -106,6 +107,7 @@ const QUESTIONS = [
     question: "Combien de Soukaina y a-t-il dans la salle ?",
     answers: ["2", "3", "4", "5"],
     correct: 2, // 4
+    waitVideo: "https://pub-2bdca0e0bf5a48ef98bdf868a8e77139.r2.dev/VIDEO%20Q13.mp4",
   },
 ];
 

@@ -429,11 +429,15 @@
     }
     async function startGame() {
       const music = $("#bg-music"); if (music) { music.volume = 0.35; music.play().catch(() => {}); } // musique de fond animateur
+      // Vire les fantômes déconnectés (sessions précédentes / tests) avant de lancer ; garde les joueurs présents
+      await sb.from("players").delete().lt("last_seen", new Date(now() - 20000).toISOString());
       await sb.rpc("reset_scores");
       const g = await fetchGame();
       await updateGame({ phase: "video", video_kind: "intro", video_src: VIDEOS.intro || "", q_index: -1, round: (g.round || 0) + 1, started_at: null });
     }
     async function resetGame() {
+      // Réinitialisation complète : on supprime TOUS les joueurs (tout le monde re-scanne) + scores
+      await sb.from("players").delete().neq("id", "00000000-0000-0000-0000-000000000000");
       await sb.rpc("reset_scores");
       await updateGame({ phase: "lobby", round: 0, q_index: -1, started_at: null, video_kind: null, video_src: null });
     }

@@ -70,12 +70,14 @@ const QUESTIONS = [
     question: "Le « E » de OSER correspond à…",
     answers: ["Excellence", "Engagement", "Esprit d'équipe", "Éthique"],
     correct: 0, // Excellence
+    waitVideo: "https://pub-2bdca0e0bf5a48ef98bdf868a8e77139.r2.dev/VIDEO%20Q8.mp4",
   },
   {
     // Excel Q9 — réponse "8".
     question: "Combien de managers ont participé au cycle de Management ?",
     answers: ["6", "8", "10", "12"],
     correct: 1, // 8
+    waitVideo: "https://pub-2bdca0e0bf5a48ef98bdf868a8e77139.r2.dev/VIDEO%20Q9.mp4",
   },
   {
     // Excel Q10 — réponse "15".

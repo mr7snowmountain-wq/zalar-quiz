@@ -129,7 +129,7 @@ const VIDEO_BASE = "https://pub-2bdca0e0bf5a48ef98bdf868a8e77139.r2.dev";
 
 const VIDEOS = {
   intro: `${VIDEO_BASE}/intro.mp4`,
-  outro: `${VIDEO_BASE}/outro.mp4`,
+  outro: `${VIDEO_BASE}/video%20fin.mp4`, // vidéo de classement / fin de partie
   transitions: [
     `${VIDEO_BASE}/video_1.mp4`,
     `${VIDEO_BASE}/video_2.mp4`,

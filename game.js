@@ -305,6 +305,11 @@
       if (!g) g = { phase: "lobby", q_index: -1, round: 0 };
       curGame = g;
       cancelAnimationFrame(timerRaf); clearInterval(ansPoll);
+      const music = $("#bg-music");
+      if (music) {
+        if (g.phase === "lobby") { music.pause(); try { music.currentTime = 0; } catch (e) {} }
+        else if (music.paused) { music.volume = 0.35; music.play().catch(() => {}); }
+      }
       switch (g.phase) {
         case "video": return adminVideo(g);
         case "question": return adminQuestion(g);
@@ -410,6 +415,7 @@
       updateGame({ phase: "question", q_index: i, started_at: new Date(now()).toISOString() });
     }
     async function startGame() {
+      const music = $("#bg-music"); if (music) { music.volume = 0.35; music.play().catch(() => {}); } // musique de fond animateur
       await sb.rpc("reset_scores");
       const g = await fetchGame();
       await updateGame({ phase: "video", video_kind: "intro", video_src: VIDEOS.intro || "", q_index: -1, round: (g.round || 0) + 1, started_at: null });

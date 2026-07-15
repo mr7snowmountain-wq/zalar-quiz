@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
   <meta name="theme-color" content="#080c1e" />
   <title>Zalar Farms Challenge</title>
-  <link rel="stylesheet" href="style.css?v=10" />
+  <link rel="stylesheet" href="style.css?v=11" />
 </head>
 <body data-role="player">
 
@@ -103,9 +103,16 @@
     <div class="intro-stage"><img class="intro-img" src="https://pub-2bdca0e0bf5a48ef98bdf868a8e77139.r2.dev/ZALAR%20intro%201.png" alt="Zalar Farms" /></div>
   </div>
 
+  <!-- Salle d'attente après réponse : vidéo entière (nette) + fond flouté assorti + timer -->
+  <div id="wait-layer" class="wait-layer">
+    <video id="wait-bg" playsinline muted loop preload="auto"></video>
+    <video id="wait-video" playsinline muted loop preload="auto"></video>
+    <div class="wait-timer-wrap"><span id="wait-timer">30</span></div>
+  </div>
+
   <script src="assets/vendor/supabase.js"></script>
   <script src="supabase-config.js"></script>
-  <script src="questions.js?v=11"></script>
-  <script src="game.js?v=8"></script>
+  <script src="questions.js?v=12"></script>
+  <script src="game.js?v=9"></script>
 </body>
 </html>

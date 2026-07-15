@@ -21,6 +21,7 @@ const QUESTIONS = [
     answers: ["6", "7", "8", "9"],
     correct: 2, // 8 (confirmé)
     note: "Les 8 produits : Agrumes, Amandes, Myrtille, Avocat, Datte, Pomme, Caroube, Asperges.",
+    waitVideo: "https://pub-2bdca0e0bf5a48ef98bdf868a8e77139.r2.dev/VIDEO%20Q1.mp4",
   },
   {
     // Excel Q2 — valeur ABSENTE du fichier source.
@@ -40,6 +41,7 @@ const QUESTIONS = [
     answers: ["5", "6", "7", "8"],
     correct: 2, // 7 (confirmé)
     note: "Les 7 produits commercialisés : Agrumes, Amandes, Myrtille, Avocat, Datte, Pomme, Asperges.",
+    waitVideo: "https://pub-2bdca0e0bf5a48ef98bdf868a8e77139.r2.dev/VIDEO%20Q4.mp4",
   },
   {
     // Excel Q5 — réponse "4" (marchés : Brésil, Maldives, Nigéria, Indonésie).

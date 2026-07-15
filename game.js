@@ -155,6 +155,7 @@
     if (sig === state.lastSig) return;
     state.lastSig = sig; state.phase = g.phase; state.qIndex = g.q_index;
     cancelAnimationFrame(state.raf);
+    hideWaitVideo();
     switch (g.phase) {
       case "question": return playerQuestion(state, g);
       case "reveal": return playerReveal(state, g);
@@ -225,6 +226,9 @@
         p_player: state.pid, p_round: g.round, p_q: g.q_index, p_choice: k, p_correct: correct, p_points: points,
       });
     } catch (e) { /* réseau : le score sera resynchronisé à la révélation */ }
+
+    // Vidéo d'attente pendant que les autres répondent (si la question en a une)
+    if (q.waitVideo) showWaitVideo(state, g);
   }
 
   async function playerReveal(state, g) {
@@ -476,6 +480,36 @@
     hideVideoLayer();
     const intro = $("#intro-layer");
     if (intro) intro.classList.add("is-active");
+  }
+
+  // Salle d'attente après réponse : vidéo entière (nette) + fond flouté assorti + timer au-dessus
+  function showWaitVideo(state, g) {
+    const q = QUESTIONS[g.q_index];
+    if (!q || !q.waitVideo) return;
+    const layer = $("#wait-layer"), fg = $("#wait-video"), bg = $("#wait-bg");
+    if (!layer) return;
+    cancelAnimationFrame(state.raf);
+    layer.classList.add("is-active");
+    [fg, bg].forEach((v) => {
+      if (!v) return;
+      v.src = q.waitVideo; v.muted = true; v.loop = true; v.playsInline = true;
+      const tryPlay = () => { const p = v.play(); if (p) p.catch(() => {}); };
+      tryPlay(); v.oncanplay = tryPlay;
+    });
+    const dur = durationOf(g.q_index);
+    const timerEl = $("#wait-timer");
+    const loop = () => {
+      const elapsed = now() - new Date(g.started_at).getTime();
+      const frac = clamp(1 - elapsed / dur, 0, 1);
+      if (timerEl) timerEl.textContent = Math.ceil((frac * dur) / 1000);
+      if (frac > 0) state.raf = requestAnimationFrame(loop);
+    };
+    loop();
+  }
+  function hideWaitVideo() {
+    const layer = $("#wait-layer"), fg = $("#wait-video"), bg = $("#wait-bg");
+    if (layer) layer.classList.remove("is-active");
+    [fg, bg].forEach((v) => { if (v) { v.pause(); v.removeAttribute("src"); v.oncanplay = null; } });
   }
 
   function renderLeaderboard(container, players) {

@@ -31,8 +31,8 @@ const QUESTIONS = [
   {
     // Excel Q3 — valeur ABSENTE du fichier source.
     question: "Quel est le pourcentage de femmes dans l'effectif du Groupe ?",
-    answers: ["15 %", "25 %", "35 %", "45 %"],
-    correct: 2, // ⚠️ À CONFIRMER — valeur manquante dans le fichier source
+    answers: ["73 %", "83 %", "93 %"],
+    correct: 1, // 83 % (confirmé)
   },
   {
     // Excel Q4 — 7 produits commercialisés listés → réponse déduite = 7.

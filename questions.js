@@ -63,6 +63,7 @@ const QUESTIONS = [
     question: "Quelle est la place de Zalar Farms dans l'exportation des dattes ?",
     answers: ["1ʳᵉ", "2ᵉ", "3ᵉ", "4ᵉ"],
     correct: 2, // 3e
+    waitVideo: "https://pub-2bdca0e0bf5a48ef98bdf868a8e77139.r2.dev/VIDEO%20Q7.mp4",
   },
   {
     // Excel Q8 — réponse "Excellence".

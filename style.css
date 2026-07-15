@@ -57,7 +57,7 @@ body{
 
 /* ---------------------------------------------------------------- Brand ---- */
 .brand{display:flex;align-items:center;gap:10px;justify-content:center;color:var(--dim);font-size:13px;font-weight:600;}
-.brand img{height:26px;width:auto;display:block;}
+.brand img{height:auto;width:auto;max-width:100%;display:block;}
 .brand .wm{font-family:var(--mono);letter-spacing:.2em;text-transform:uppercase;font-size:12px;}
 .brand .wm b{color:var(--text);}
 
@@ -142,7 +142,7 @@ body{
 .video-fallback .wm{font-family:var(--mono);font-weight:700;letter-spacing:.2em;font-size:18px;text-transform:uppercase;}
 
 /* ============================================================== ADMIN ===== */
-.admin-head{display:flex;align-items:center;justify-content:space-between;padding-bottom:16px;}
+.admin-head{position:relative;z-index:10;display:flex;align-items:center;justify-content:space-between;padding-bottom:16px;}
 .admin-head .tagline{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--faint);}
 .grow-admin{flex:1;min-height:0;display:flex;flex-direction:column;}
 
@@ -248,5 +248,23 @@ body{
 .bigq,.qtext,#reveal-q-text,#admin-q-text,.big-title,.title-xl,.acard,.q-text{overflow-wrap:anywhere;word-break:break-word;}
 .acard{overflow:hidden;}
 .admin-head .tagline{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+
+/* Écran animateur — RESPONSIVE : défilement + alignement haut sur petit écran (zéro découpe) */
+.app--wide .screen{overflow-y:auto;overflow-x:hidden;padding-top:96px;}
+.brand img{max-width:100%;}
+@media(max-width:900px){
+  .app--wide{padding-top:max(14px,env(safe-area-inset-top));}
+  .app--wide .screen{justify-content:flex-start;}
+  #screen-admin-lobby .stage,
+  #screen-admin-question>.grow{justify-content:flex-start!important;}
+  .admin-grid{align-content:flex-start;}
+  .big-title{font-size:clamp(24px,6.6vw,38px);}
+  .bigq{font-size:clamp(24px,6vw,40px);}
+  .atimer{font-size:clamp(40px,12vw,72px);}
+  .admin-head{gap:10px;}
+  .admin-head .tagline{display:none;}
+  .agrid{grid-template-columns:1fr;}
+  .qr-card{align-self:center;}
+}
 
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;}}

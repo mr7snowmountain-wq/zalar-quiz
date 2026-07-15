@@ -80,8 +80,8 @@ const QUESTIONS = [
   {
     // Excel Q11 — valeur ABSENTE du fichier source.
     question: "Combien d'audits sont réalisés sur une saison ?",
-    answers: ["Environ 20", "Environ 40", "Environ 60", "Environ 80"],
-    correct: 1, // ⚠️ À CONFIRMER — valeur manquante dans le fichier source
+    answers: ["48", "56", "64", "72"],
+    correct: 2, // 64 (confirmé)
   },
   {
     // Excel Q12 — options : Halal / IFS Food / Bio. Bonne réponse ambiguë.

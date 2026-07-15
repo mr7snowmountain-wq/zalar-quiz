@@ -84,6 +84,7 @@ const QUESTIONS = [
     question: "Sur combien de référentiels les sites du Groupe sont-ils audités ?",
     answers: ["10", "12", "15", "18"],
     correct: 2, // 15
+    waitVideo: "https://pub-2bdca0e0bf5a48ef98bdf868a8e77139.r2.dev/video%20Q10.mp4",
   },
   {
     // Excel Q11 — valeur ABSENTE du fichier source.

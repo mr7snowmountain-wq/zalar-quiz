@@ -99,6 +99,7 @@ const QUESTIONS = [
     answers: ["Halal", "IFS Food", "Bio", "GlobalG.A.P."],
     correct: 0, // Halal (confirmé)
     note: "Les référentiels cités : Halal, IFS Food, Bio.",
+    waitVideo: "https://pub-2bdca0e0bf5a48ef98bdf868a8e77139.r2.dev/VIDEO%20Q12.mp4",
   },
   {
     // Question d'ambiance — placée à la fin.

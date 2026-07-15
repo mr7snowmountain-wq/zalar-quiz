@@ -73,7 +73,10 @@
         <div class="card stage" style="padding:26px">
           <h2 id="reveal-q-text" style="font-size:24px;font-weight:700;line-height:1.25">…</h2>
           <div class="dist" id="reveal-dist"></div>
-          <div class="chip" id="reveal-correct" style="align-self:flex-start;margin-top:auto"></div>
+          <div style="margin-top:auto;display:flex;flex-direction:column;gap:8px;align-items:flex-start">
+            <div class="chip" id="reveal-correct"></div>
+            <div id="reveal-note" class="muted" style="font-size:15px;line-height:1.45"></div>
+          </div>
         </div>
         <div class="card stage" style="padding:26px">
           <span class="eyebrow">Classement — Top 10</span>
@@ -119,7 +122,7 @@
   <script src="assets/vendor/supabase.js"></script>
   <script src="assets/vendor/qrcode-generator.js"></script>
   <script src="supabase-config.js"></script>
-  <script src="questions.js?v=6"></script>
-  <script src="game.js?v=6"></script>
+  <script src="questions.js?v=7"></script>
+  <script src="game.js?v=7"></script>
 </body>
 </html>

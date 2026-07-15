@@ -365,6 +365,7 @@
       }).join("");
       requestAnimationFrame(() => $$("#reveal-dist .dbar i").forEach((el) => { el.style.width = el.dataset.w + "%"; }));
       $("#reveal-correct").innerHTML = `Bonne réponse : <b>${"ABCD"[q.correct]} · ${esc(q.answers[q.correct])}</b>`;
+      const noteEl = $("#reveal-note"); if (noteEl) noteEl.textContent = q.note || "";
       renderLeaderboard($("#reveal-lb"), players);
 
       const isLast = g.q_index >= QUESTIONS.length - 1;

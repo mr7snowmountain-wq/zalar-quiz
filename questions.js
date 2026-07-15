@@ -19,7 +19,8 @@ const QUESTIONS = [
     // Datte, Pomme, Caroube, Asperges) → réponse déduite = 8.
     question: "Combien de produits Zalar Farms produit-il ?",
     answers: ["6", "7", "8", "9"],
-    correct: 2, // 8  — À CONFIRMER
+    correct: 2, // 8 (confirmé)
+    note: "Les 8 produits : Agrumes, Amandes, Myrtille, Avocat, Datte, Pomme, Caroube, Asperges.",
   },
   {
     // Excel Q2 — valeur ABSENTE du fichier source.
@@ -37,7 +38,8 @@ const QUESTIONS = [
     // Excel Q4 — 7 produits commercialisés listés → réponse déduite = 7.
     question: "Combien de produits Zalar Farms commercialise-t-il ?",
     answers: ["5", "6", "7", "8"],
-    correct: 2, // 7 — À CONFIRMER
+    correct: 2, // 7 (confirmé)
+    note: "Les 7 produits commercialisés : Agrumes, Amandes, Myrtille, Avocat, Datte, Pomme, Asperges.",
   },
   {
     // Excel Q5 — réponse "4" (marchés : Brésil, Maldives, Nigéria, Indonésie).
@@ -85,7 +87,8 @@ const QUESTIONS = [
     // Excel Q12 — options : Halal / IFS Food / Bio. Bonne réponse ambiguë.
     question: "Quel est le dernier référentiel selon lequel un site a été audité ?",
     answers: ["Halal", "IFS Food", "Bio", "GlobalG.A.P."],
-    correct: 0, // Halal — ⚠️ À CONFIRMER
+    correct: 0, // Halal (confirmé)
+    note: "Les référentiels cités : Halal, IFS Food, Bio.",
   },
 ];
 

@@ -49,6 +49,7 @@ const QUESTIONS = [
     question: "Combien de nouveaux marchés Zalar Farms a-t-il développés ?",
     answers: ["2", "3", "4", "5"],
     correct: 2, // 4
+    waitVideo: "https://pub-2bdca0e0bf5a48ef98bdf868a8e77139.r2.dev/VIDEO%20Q5.mp4",
   },
   {
     // Excel Q6 — réponse "7".

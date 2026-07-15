@@ -116,10 +116,11 @@
       localStorage.setItem("zfc_pid", state.pid);
       localStorage.setItem("zfc_name", name);
       localStorage.setItem("zfc_ini", ini);
+      await syncClock();
       startPolling(state);
     }
 
-    if (state.pid && state.name) { if (!state.ini) state.ini = initials(state.name); startPolling(state); }
+    if (state.pid && state.name) { if (!state.ini) state.ini = initials(state.name); syncClock().then(() => startPolling(state)); }
     else showScreen("screen-join");
   }
 
@@ -172,6 +173,11 @@
   function playerQuestion(state, g) {
     const q = QUESTIONS[g.q_index]; if (!q) return;
     hideVideoLayer();
+    // Rejoint après la fin du chrono : écran d'attente propre (pas de grille figée)
+    const startTs = new Date(g.started_at).getTime();
+    if (state.answeredKey !== g.round + "_" + g.q_index && now() - startTs >= durationOf(g.q_index)) {
+      showScreen("screen-watch"); return;
+    }
     showScreen("screen-question");
     $("#q-counter").textContent = `Question ${g.q_index + 1} / ${QUESTIONS.length}`;
     $("#q-text").textContent = q.question;
@@ -500,6 +506,8 @@
       const tryPlay = () => { const p = v.play(); if (p) p.catch(() => {}); };
       tryPlay(); v.oncanplay = tryPlay;
     });
+    // Si la vidéo ne charge pas : on masque la couche (pas d'écran noir figé)
+    fg.onerror = () => hideWaitVideo();
     const dur = durationOf(g.q_index);
     const timerEl = $("#wait-timer");
     const loop = () => {

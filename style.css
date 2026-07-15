@@ -46,7 +46,10 @@ body{
 /* ---------------------------------------------------------------- Layout --- */
 .app{position:relative;height:100%;width:100%;max-width:520px;margin:0 auto;display:flex;flex-direction:column;
   padding:max(18px,env(safe-area-inset-top)) 20px max(18px,env(safe-area-inset-bottom));}
-.app--wide{max-width:1360px;}
+.app--wide{max-width:1360px;padding-left:clamp(20px,3.2vw,48px);padding-right:clamp(20px,3.2vw,48px);gap:12px;}
+/* Zone des écrans animateur : remplit l'espace entre l'en-tête et la barre de boutons */
+.screens{position:relative;flex:1;min-height:0;}
+.screens>.screen{position:absolute;inset:0;padding:0;overflow-y:auto;overflow-x:hidden;}
 
 .screen{position:absolute;inset:0;display:none;flex-direction:column;padding:inherit;animation:screen-in .5s var(--ease);}
 .screen.is-active{display:flex;}
@@ -142,7 +145,7 @@ body{
 .video-fallback .wm{font-family:var(--mono);font-weight:700;letter-spacing:.2em;font-size:18px;text-transform:uppercase;}
 
 /* ============================================================== ADMIN ===== */
-.admin-head{position:relative;z-index:10;display:flex;align-items:center;justify-content:space-between;padding-bottom:16px;}
+.admin-head{flex:none;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:2px 30px 2px;}
 .admin-head .tagline{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--faint);}
 .grow-admin{flex:1;min-height:0;display:flex;flex-direction:column;}
 
@@ -206,11 +209,9 @@ body{
 .pod.p1{animation-delay:.5s;}.pod.p2{animation-delay:.2s;}.pod.p3{animation-delay:.35s;}
 
 /* Controls animateur : barre flottante */
-.controls{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);width:min(760px,92vw);z-index:600;display:flex;gap:12px;flex-wrap:wrap;}
+.controls{flex:none;width:100%;max-width:760px;margin:0 auto;display:flex;gap:12px;flex-wrap:wrap;}
 .controls:empty{display:none;}
 .controls .btn{flex:1;min-width:150px;}
-.app--wide .screen{padding-bottom:104px;}
-.app--wide #screen-admin-lobby{padding-bottom:max(18px,env(safe-area-inset-bottom));}
 #admin-q-answers .acard,#admin-q-answers .badge{}
 
 /* ------------------------------------------------------------- Utils ------ */
@@ -250,18 +251,16 @@ body{
 .admin-head .tagline{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 
 /* Écran animateur — RESPONSIVE : défilement + alignement haut sur petit écran (zéro découpe) */
-.app--wide .screen{overflow-y:auto;overflow-x:hidden;padding-top:120px;}
 .brand img{max-width:100%;}
+#screen-admin-lobby .stage{justify-content:flex-start;}
 @media(max-width:900px){
-  .app--wide{padding-top:max(14px,env(safe-area-inset-top));}
-  .app--wide .screen{justify-content:flex-start;}
-  #screen-admin-lobby .stage,
+  .app--wide{padding-left:16px;padding-right:16px;}
   #screen-admin-question>.grow{justify-content:flex-start!important;}
-  .admin-grid{align-content:flex-start;}
+  .admin-grid{align-content:flex-start;grid-template-columns:1fr;}
   .big-title{font-size:clamp(24px,6.6vw,38px);}
   .bigq{font-size:clamp(24px,6vw,40px);}
   .atimer{font-size:clamp(40px,12vw,72px);}
-  .admin-head{gap:10px;}
+  .admin-head{padding:2px 6px;gap:10px;}
   .admin-head .tagline{display:none;}
   .agrid{grid-template-columns:1fr;}
   .qr-card{align-self:center;}

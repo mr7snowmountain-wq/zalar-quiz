@@ -310,6 +310,10 @@
     renderAdmin(curGame);
     refreshPlayersUI();
     $("#start-btn").addEventListener("click", startGame);
+    const resetBtn = $("#admin-reset");
+    if (resetBtn) resetBtn.addEventListener("click", () => {
+      if (confirm("Réinitialiser la partie ? Tous les joueurs et scores seront effacés, et l'écran revient au lobby.")) resetGame();
+    });
 
     function renderAdmin(g) {
       if (!g) g = { phase: "lobby", q_index: -1, round: 0 };

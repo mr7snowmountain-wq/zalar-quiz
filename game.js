@@ -398,6 +398,9 @@
       };
       if (g.video_kind === "intro") showIntroLayer();               // intro = PNG animé
       else playVideoLayer(g.video_src, { loop: true });             // transition/outro = vidéo en boucle
+      // Rendre l'image/vidéo cliquable (animateur) pour lancer la suite
+      const clickLayer = g.video_kind === "intro" ? $("#intro-layer") : $("#video-layer");
+      if (clickLayer) { clickLayer.style.pointerEvents = "auto"; clickLayer.style.cursor = "pointer"; clickLayer.onclick = advance; }
       const label = g.video_kind === "intro" ? "Lancer la 1ʳᵉ question"
         : g.video_kind === "outro" ? "Voir le podium" : "Lancer la question suivante";
       controls.innerHTML = `<button class="btn blue" id="next-video-btn">${label}</button>`;
@@ -474,6 +477,7 @@
     if (layer) layer.classList.remove("is-active");
     if (fb) fb.classList.remove("is-active");
     if (intro) intro.classList.remove("is-active");
+    [layer, intro].forEach((el) => { if (el) { el.style.pointerEvents = ""; el.style.cursor = ""; el.onclick = null; } });
     if (video) { video.pause(); video.removeAttribute("src"); video.onended = null; video.onerror = null; video.oncanplay = null; video.onloadeddata = null; video.style.display = "block"; }
   }
   function showIntroLayer() {

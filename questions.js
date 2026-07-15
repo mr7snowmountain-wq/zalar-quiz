@@ -123,6 +123,10 @@ const VIDEOS = {
   ],
 };
 
+// Intro : PNG transparent animé en CSS (pas une vidéo).
+const INTRO_IMAGE = `${VIDEO_BASE}/ZALAR%20intro%201.png`;
+
 // Exposé globalement (chargé via <script>, pas de modules ES).
 window.QUESTIONS = QUESTIONS;
 window.VIDEOS = VIDEOS;
+window.INTRO_IMAGE = INTRO_IMAGE;

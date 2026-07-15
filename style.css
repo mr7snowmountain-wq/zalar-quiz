@@ -223,6 +223,25 @@ body{
 
 .warn-banner{position:fixed;top:0;left:0;right:0;z-index:800;background:linear-gradient(90deg,#F45C9A,#B25CFF);color:#160a24;font-weight:700;font-size:13px;text-align:center;padding:10px 16px;}
 
+/* Intro animée : PNG transparent sur fond bleu nuit, ambiance jeu */
+.intro-layer{position:fixed;inset:0;z-index:520;display:none;opacity:0;transition:opacity .4s var(--ease);pointer-events:none;overflow:hidden;
+  background:
+    radial-gradient(90% 60% at 20% 0%, rgba(79,134,255,.28), transparent 60%),
+    radial-gradient(80% 60% at 100% 40%, rgba(138,107,255,.22), transparent 60%),
+    radial-gradient(120% 60% at 50% 110%, rgba(255,170,80,.10), transparent 60%),
+    linear-gradient(180deg,#0a1230,#080c1e);}
+.intro-layer.is-active{display:grid;place-items:center;opacity:1;}
+.intro-glow{position:absolute;width:66vmin;height:66vmin;border-radius:50%;
+  background:radial-gradient(circle, rgba(79,134,255,.42), rgba(138,107,255,.18) 45%, transparent 70%);
+  filter:blur(34px);animation:intro-pulse 3.2s ease-in-out infinite;}
+.intro-stage{position:relative;animation:intro-float 4.6s ease-in-out infinite;}
+.intro-img{display:block;max-width:80vw;max-height:70vh;width:auto;height:auto;
+  filter:drop-shadow(0 22px 55px rgba(0,0,0,.55)) drop-shadow(0 0 44px rgba(79,134,255,.4));
+  animation:intro-in 1s var(--ease) both;}
+@keyframes intro-in{0%{opacity:0;transform:scale(.82)}60%{transform:scale(1.05)}100%{opacity:1;transform:scale(1)}}
+@keyframes intro-float{0%,100%{transform:translateY(-9px) rotate(-.6deg)}50%{transform:translateY(11px) rotate(.6deg)}}
+@keyframes intro-pulse{0%,100%{transform:scale(1);opacity:.55}50%{transform:scale(1.15);opacity:.9}}
+
 /* Anti-débordement : les enfants de grille peuvent rétrécir + textes longs coupés */
 .admin-grid>*{min-width:0;}
 .stage,.acard,.lname,.lrow,.drow,.pchip,.lb,.dist,.players{min-width:0;}

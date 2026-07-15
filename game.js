@@ -231,6 +231,7 @@
   }
 
   function playerVideo(state, g) {
+    if (g.video_kind === "intro") { showIntroLayer(); return; } // intro = PNG animé
     if (CONFIG.playVideoOnPlayers && g.video_src) { playVideoLayer(g.video_src, { loop: true }); return; }
     hideVideoLayer();
     showScreen("screen-watch");
@@ -369,7 +370,8 @@
         if (g.video_kind === "outro") return updateGame({ phase: "podium" });
         return showQuestion((g.q_index || 0) + 1);
       };
-      playVideoLayer(g.video_src, { loop: true }); // boucle jusqu'au clic de l'animateur
+      if (g.video_kind === "intro") showIntroLayer();               // intro = PNG animé
+      else playVideoLayer(g.video_src, { loop: true });             // transition/outro = vidéo en boucle
       const label = g.video_kind === "intro" ? "Lancer la 1ʳᵉ question"
         : g.video_kind === "outro" ? "Voir le podium" : "Lancer la question suivante";
       controls.innerHTML = `<button class="btn blue" id="next-video-btn">${label}</button>`;
@@ -441,10 +443,16 @@
     if (_preloadEl.src !== src) { _preloadEl.src = src; _preloadEl.load(); }
   }
   function hideVideoLayer() {
-    const layer = $("#video-layer"), video = $("#video-el"), fb = $("#video-fallback");
+    const layer = $("#video-layer"), video = $("#video-el"), fb = $("#video-fallback"), intro = $("#intro-layer");
     if (layer) layer.classList.remove("is-active");
     if (fb) fb.classList.remove("is-active");
+    if (intro) intro.classList.remove("is-active");
     if (video) { video.pause(); video.removeAttribute("src"); video.onended = null; video.onerror = null; video.oncanplay = null; video.onloadeddata = null; video.style.display = "block"; }
+  }
+  function showIntroLayer() {
+    hideVideoLayer();
+    const intro = $("#intro-layer");
+    if (intro) intro.classList.add("is-active");
   }
 
   function renderLeaderboard(container, players) {

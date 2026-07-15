@@ -15,12 +15,6 @@
 
 const QUESTIONS = [
   {
-    // Question d'ambiance (ajoutée) — déplaçable si besoin.
-    question: "Combien de Soukaina y a-t-il dans la salle ?",
-    answers: ["2", "3", "4", "5"],
-    correct: 2, // 4
-  },
-  {
     // Excel Q1 — 8 produits étaient listés (Agrumes, Amandes, Myrtille, Avocat,
     // Datte, Pomme, Caroube, Asperges) → réponse déduite = 8.
     question: "Combien de produits Zalar Farms produit-il ?",
@@ -95,6 +89,12 @@ const QUESTIONS = [
     answers: ["Halal", "IFS Food", "Bio", "GlobalG.A.P."],
     correct: 0, // Halal (confirmé)
     note: "Les référentiels cités : Halal, IFS Food, Bio.",
+  },
+  {
+    // Question d'ambiance — placée à la fin.
+    question: "Combien de Soukaina y a-t-il dans la salle ?",
+    answers: ["2", "3", "4", "5"],
+    correct: 2, // 4
   },
 ];
 

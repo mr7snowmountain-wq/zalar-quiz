@@ -97,7 +97,8 @@
     refreshMono();
 
     const leaveBtn = $("#leave-btn");
-    if (leaveBtn) leaveBtn.addEventListener("click", () => {
+    if (leaveBtn) leaveBtn.addEventListener("click", async () => {
+      try { if (state.pid) await sb.from("players").delete().eq("id", state.pid); } catch (e) {}
       localStorage.removeItem("zfc_pid");
       localStorage.removeItem("zfc_name");
       localStorage.removeItem("zfc_ini");
@@ -122,13 +123,24 @@
     else showScreen("screen-join");
   }
 
+  const ACTIVE_MS = 15000; // un joueur est "connecté" si vu il y a moins de 15 s
+  const activeCutoffIso = () => new Date(now() - ACTIVE_MS).toISOString();
+
   function startPolling(state) {
+    // Battement de cœur : le joueur signale qu'il est toujours là (toutes les 5 s)
+    const heartbeat = () => {
+      if (state.pid) sb.from("players").update({ last_seen: new Date(now()).toISOString() }).eq("id", state.pid);
+    };
+    heartbeat();
+    clearInterval(state.beat);
+    state.beat = setInterval(heartbeat, 5000);
+
     const tick = async () => {
       const g = await fetchGame();
       if (!g) return;
       applyGame(state, g);
       if (g.phase === "lobby") {
-        const { count } = await sb.from("players").select("*", { count: "exact", head: true });
+        const { count } = await sb.from("players").select("*", { count: "exact", head: true }).gt("last_seen", activeCutoffIso());
         const el = $("#lobby-count"); if (el && typeof count === "number") el.textContent = count;
       }
     };
@@ -261,23 +273,27 @@
     $("#join-url").textContent = joinUrl.replace(/^https?:\/\//, "");
     makeQR($("#qr-canvas"), joinUrl);
 
+    let activeCount = 0;
     async function loadPlayers() {
-      const { data } = await sb.from("players").select("id,name,initials,score").order("score", { ascending: false });
-      players = (data || []).map((p) => ({ id: p.id, name: p.name, ini: p.initials || initials(p.name), score: p.score }));
+      const { data } = await sb.from("players").select("id,name,initials,score,last_seen").order("score", { ascending: false });
+      players = (data || []).map((p) => ({ id: p.id, name: p.name, ini: p.initials || initials(p.name), score: p.score, last_seen: p.last_seen }));
     }
     function refreshPlayersUI() {
+      const cutoff = now() - ACTIVE_MS;
+      const active = players.filter((p) => p.last_seen && new Date(p.last_seen).getTime() > cutoff);
+      activeCount = active.length;
       const grid = $("#admin-players");
-      if (grid) grid.innerHTML = players.map((p) =>
+      if (grid) grid.innerHTML = active.map((p) =>
         `<span class="pchip"><span class="badge ${GRADS[p.name.length % 4]}">${esc(p.ini)}</span>${esc(p.name)}</span>`).join("");
-      const c = $("#admin-player-count"); if (c) c.textContent = players.length;
+      const c = $("#admin-player-count"); if (c) c.textContent = active.length;
       if (curGame && curGame.phase === "reveal") renderLeaderboard($("#reveal-lb"), players);
       if (curGame && curGame.phase === "podium") { renderPodium($("#admin-podium"), players.slice(0, 3)); renderLeaderboard($("#admin-final-lb"), players); }
     }
 
     sb.channel("zfc-game").on("postgres_changes", { event: "*", schema: "public", table: "game" },
       (p) => { renderAdmin(p.new); }).subscribe();
-    sb.channel("zfc-players").on("postgres_changes", { event: "*", schema: "public", table: "players" },
-      async () => { await loadPlayers(); refreshPlayersUI(); }).subscribe();
+    // Joueurs sondés (pas en temps réel) : évite le spam des battements de cœur + reflète les déconnexions
+    setInterval(async () => { await loadPlayers(); refreshPlayersUI(); }, 2500);
 
     await loadPlayers();
     curGame = await fetchGame();
@@ -329,7 +345,7 @@
         const { count } = await sb.from("answers").select("*", { count: "exact", head: true })
           .eq("round", g.round).eq("q_index", g.q_index);
         const el = $("#answered-count");
-        if (el) el.textContent = `${count || 0} / ${players.length} ont répondu`;
+        if (el) el.textContent = `${count || 0} / ${activeCount} ont répondu`;
       };
       countAns(); ansPoll = setInterval(countAns, 1200);
     }

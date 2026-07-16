@@ -299,7 +299,7 @@ body{
   .qr-card{padding:10px;}
   .qr-card canvas,.qr-card img{width:150px!important;height:150px!important;}
   .admin-head{padding:2px 4px;}
-  .brand img{max-height:52px!important;}
+  .admin-head .brand img{max-height:52px!important;}
   #start-btn{max-width:100%!important;}
 }
 

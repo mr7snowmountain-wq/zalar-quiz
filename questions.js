@@ -24,10 +24,10 @@ const QUESTIONS = [
     waitVideo: "https://pub-2bdca0e0bf5a48ef98bdf868a8e77139.r2.dev/VIDEO%20Q1.mp4",
   },
   {
-    // Excel Q2 — valeur ABSENTE du fichier source.
+    // Excel Q2 — réponse confirmée par Zalar : 3 200.
     question: "Quelle est la moyenne mensuelle des effectifs du Groupe ?",
-    answers: ["Environ 3 000", "Environ 5 000", "Environ 7 000", "Environ 10 000"],
-    correct: 0, // ⚠️ À CONFIRMER — valeur manquante dans le fichier source
+    answers: ["1 200", "2 200", "3 200", "4 200"],
+    correct: 2, // 3 200 (confirmé)
     waitVideo: "https://pub-2bdca0e0bf5a48ef98bdf868a8e77139.r2.dev/VIDEO%20Q2.mp4",
   },
   {

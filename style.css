@@ -255,6 +255,11 @@ body{
 @keyframes intro-float{0%,100%{transform:translateY(-9px) rotate(-.6deg)}50%{transform:translateY(11px) rotate(.6deg)}}
 @keyframes intro-pulse{0%,100%{transform:scale(1);opacity:.55}50%{transform:scale(1.15);opacity:.9}}
 
+/* Logo animé sur la page d'attente joueur (flottement + halo, comme l'intro) */
+.lobby-logo{display:block;height:auto;max-height:clamp(120px,20vh,180px);width:min(78vw,330px);max-width:100%;object-fit:contain;
+  filter:drop-shadow(0 16px 40px rgba(0,0,0,.5)) drop-shadow(0 0 34px rgba(79,134,255,.42));
+  animation:intro-float 4.6s ease-in-out infinite, intro-in .9s var(--ease) both;}
+
 /* Salle d'attente après réponse : vidéo ENTIÈRE (nette, non rognée) + fond flouté assorti + timer */
 .wait-layer{position:fixed;inset:0;z-index:510;display:none;background:#000;overflow:hidden;}
 .wait-layer.is-active{display:block;}

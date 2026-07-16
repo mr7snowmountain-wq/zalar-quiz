@@ -507,8 +507,13 @@
     const layer = $("#wait-layer"), fg = $("#wait-video"), bg = $("#wait-bg");
     if (!layer) return;
     cancelAnimationFrame(state.raf);
+    // Fond derrière la vidéo : couleur unie par défaut (blanc), ou flou vidéo si waitBg==="blur".
+    // q.waitBg peut valoir une couleur ("#fff", "#0b1330"...) ou "blur". Par défaut : blanc.
+    const solidBg = q.waitBg === "blur" ? null : (q.waitBg || "#ffffff");
+    layer.style.background = solidBg || "#000";
+    if (bg) bg.style.display = solidBg ? "none" : "block";
     layer.classList.add("is-active");
-    [fg, bg].forEach((v) => {
+    (solidBg ? [fg] : [fg, bg]).forEach((v) => {
       if (!v) return;
       v.src = q.waitVideo; v.muted = true; v.loop = true; v.playsInline = true;
       const tryPlay = () => { const p = v.play(); if (p) p.catch(() => {}); };
@@ -528,7 +533,8 @@
   }
   function hideWaitVideo() {
     const layer = $("#wait-layer"), fg = $("#wait-video"), bg = $("#wait-bg");
-    if (layer) layer.classList.remove("is-active");
+    if (layer) { layer.classList.remove("is-active"); layer.style.background = ""; }
+    if (bg) bg.style.display = "";
     [fg, bg].forEach((v) => { if (v) { v.pause(); v.removeAttribute("src"); v.oncanplay = null; } });
   }
 

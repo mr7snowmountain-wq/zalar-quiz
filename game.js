@@ -124,7 +124,7 @@
     else showScreen("screen-join");
   }
 
-  const ACTIVE_MS = 15000; // un joueur est "connecté" si vu il y a moins de 15 s
+  const ACTIVE_MS = 120000; // un joueur est "connecté" si vu il y a moins de 2 min (tolère les tél en veille en salle d'attente)
   const activeCutoffIso = () => new Date(now() - ACTIVE_MS).toISOString();
 
   function startPolling(state) {
@@ -434,7 +434,7 @@
     async function startGame() {
       const music = $("#bg-music"); if (music) { music.volume = 0.35; music.play().catch(() => {}); } // musique de fond animateur
       // Vire les fantômes déconnectés (sessions précédentes / tests) avant de lancer ; garde les joueurs présents
-      await sb.from("players").delete().lt("last_seen", new Date(now() - 20000).toISOString());
+      await sb.from("players").delete().lt("last_seen", new Date(now() - 120000).toISOString());
       await sb.rpc("reset_scores");
       const g = await fetchGame();
       await updateGame({ phase: "video", video_kind: "intro", video_src: VIDEOS.intro || "", q_index: -1, round: (g.round || 0) + 1, started_at: null });

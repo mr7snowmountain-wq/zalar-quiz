@@ -90,8 +90,8 @@ const QUESTIONS = [
   {
     // Excel Q11 — valeur ABSENTE du fichier source.
     question: "Combien d'audits sont réalisés sur une saison ?",
-    answers: ["48", "56", "64", "72"],
-    correct: 2, // 64 (confirmé)
+    answers: ["34", "44", "54", "64"],
+    correct: 3, // 64 (confirmé) — placé en valeur la plus élevée
     waitVideo: "https://pub-2bdca0e0bf5a48ef98bdf868a8e77139.r2.dev/VIDEO%20Q11.mp4",
   },
   {
